@@ -1,6 +1,6 @@
 {
     "name": "graphql-objectid-scalar",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "MongoDB objectId scalar for GraphQL.js",
     "files": [
         "lib"
@@ -41,9 +41,16 @@
         "url": "git+https://github.com/captorab/graphql-objectid-scalar.git"
     },
     "keywords": [
-        "graphql"
+        "graphql",
+        "scalar",
+        "mongodb",
+        "ObjectId"
     ],
-    "author": "Andreas Lindh",
+    "author": {
+        "name": "Andreas Lindh",
+        "email": "info@captor.se",
+        "url": "https://captor.se"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/captorab/graphql-objectid-scalar/issues"

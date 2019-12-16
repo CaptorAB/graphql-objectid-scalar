@@ -6,12 +6,15 @@ import { GraphQLObjectId } from "../src";
 const { serialize, parseValue, parseLiteral } = GraphQLObjectId;
 
 describe("graphql-objectid-scalar", () => {
-    test("Should serialize", () => {
+    test("Should serialize an ObjectId object", () => {
         const id = new ObjectId();
-
         const value = serialize(id);
 
         expect(value).toEqual(id.toString());
+    });
+
+    test("Serialize should reject non ObjectId value", async () => {
+        await expect(() => serialize("garbage").toThrow(new GraphQLError()));
     });
 
     test("parseValue should reject garbage", async () => {

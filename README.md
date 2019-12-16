@@ -6,25 +6,24 @@
 
 ## Usage
 
-Install it with 
-```
+Install it with
+
+```bash
 npm install graphql-objectid-scalar
 ```
 
-
-This package exports a GraphQLObjectId value scalar GraphQL.js type:
+This package exports a mongodb GraphQLObjectId scalar :
 
 ```js
 import { GraphQLObjectId } from "graphql-objectid-scalar";
 ```
-
 
 ### SDL with [GraphQL-tools](https://github.com/apollographql/graphql-tools)
 
 When using the SDL with GraphQL-tools, define `GraphQLObjectId` as the resolver for the appropriate scalar type in your schema:
 
 ```js
-import { makeExecutableSchema } from 'graphql-tools';
+import { makeExecutableSchema } from "graphql-tools";
 import { GraphQLObjectId } from "graphql-objectid-scalar";
 
 const typeDefs = `
@@ -38,7 +37,7 @@ type MyType {
 `;
 
 const resolvers = {
-  GraphQLObjectId: GraphQLObjectId,
+    GraphQLObjectId: GraphQLObjectId
 };
 
 export default makeExecutableSchema({ typeDefs, resolvers });

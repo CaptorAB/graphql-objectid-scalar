@@ -20,9 +20,13 @@ export const GraphQLObjectId = new GraphQLScalarType({
 
     // from database towards client
     serialize(value) {
+        if (value.constructor !== ObjectId) {
+            throw new GraphQLError("serialize: value: " + value.toString() + " is not valid ObjectId");
+        }
+
         let result = value.toString();
         if (!isValidMongoDBObjectID(result)) {
-            throw new GraphQLError("serialize: value: " + value + " is not valid object id");
+            throw new GraphQLError("serialize: value: " + value.toString() + " is not valid ObjectId");
         }
 
         return result;
