@@ -1,0 +1,76 @@
+{
+    "name": "graphql-objectid-scalar",
+    "version": "0.1.0",
+    "description": "MongoDB objectId scalar for GraphQL.js",
+    "files": [
+        "lib"
+    ],
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "babel src -d lib --delete-dir-on-start",
+        "lint": "eslint src --ext .js",
+        "prepublish": "npm run build",
+        "test": "npx jest --detectOpenHandles --maxWorkers=1 --coverage"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint src --ext .js",
+            "git add"
+        ]
+    },
+    "prettier": {
+        "printWidth": 140,
+        "semi": true,
+        "tabWidth": 4,
+        "bracketSpacing": true,
+        "arrowParens": "always"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**"
+        ],
+        "testEnvironment": "node"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/captorab/graphql-objectid-scalar.git"
+    },
+    "keywords": [
+        "graphql"
+    ],
+    "author": "Andreas Lindh",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/captorab/graphql-objectid-scalar/issues"
+    },
+    "homepage": "https://github.com/captorab/graphql-objectid-scalar#readme",
+    "peerDependencies": {
+        "graphql": ">=0.8.0",
+        "mongodb": ">=3.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.7.5",
+        "@babel/core": "^7.7.5",
+        "@babel/preset-env": "^7.7.6",
+        "babel-eslint": "^10.0.3",
+        "babel-jest": "^24.9.0",
+        "eslint": "^6.7.2",
+        "eslint-config-prettier": "^6.7.0",
+        "eslint-plugin-babel": "^5.3.0",
+        "eslint-plugin-import": "^2.19.1",
+        "eslint-plugin-jest": "^23.1.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-promise": "^4.2.1",
+        "husky": "^3.1.0",
+        "jest": "^24.9.0",
+        "lint-staged": "^9.5.0",
+        "prettier": "^1.19.1",
+        "graphql": ">=0.8.0",
+        "mongodb": ">=3.0.0"
+    }
+}
