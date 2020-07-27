@@ -1,6 +1,6 @@
 {
     "name": "graphql-objectid-scalar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "MongoDB objectId scalar for GraphQL.js",
     "files": [
         "lib"
