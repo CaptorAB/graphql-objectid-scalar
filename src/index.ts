@@ -3,11 +3,11 @@ import { Kind } from "graphql/language";
 import { GraphQLError } from "graphql/error";
 import { ObjectId } from "mongodb";
 
-export function isValidMongoDBObjectID(id) {
+export function isValidMongoDBObjectID(id: string): boolean {
     /// https://stackoverflow.com/questions/11985228/mongodb-node-check-if-objectid-is-valid
     id = id + "";
-    var len = id.length,
-        valid = false;
+    const len = id.length;
+    let valid = false;
     if (len === 12 || len === 24) {
         valid = /^[0-9a-fA-F]+$/.test(id);
     }
@@ -19,11 +19,7 @@ export const GraphQLObjectId = new GraphQLScalarType({
     description: "GraphQLObjectId is a mongodb ObjectId. String of 12 or 24 hex chars",
 
     // from database towards client
-    serialize(value) {
-        /*if (value.constructor !== ObjectId) {
-            throw new GraphQLError("serialize: value: " + value.toString() + " is not valid ObjectId");
-        }*/
-
+    serialize(value): string {
         let result = value.toString();
         if (!isValidMongoDBObjectID(result)) {
             throw new GraphQLError("serialize: value: " + value.toString() + " is not valid ObjectId");
@@ -33,7 +29,7 @@ export const GraphQLObjectId = new GraphQLScalarType({
     },
 
     // json from client towards database
-    parseValue(value) {
+    parseValue(value): ObjectId {
         if (!isValidMongoDBObjectID(value)) {
             throw new GraphQLError("serialize: not a valid ObjectId, require a string with 12 or 24 hex chars, found: " + value);
         }
@@ -42,7 +38,7 @@ export const GraphQLObjectId = new GraphQLScalarType({
     },
 
     // AST from client towards database
-    parseLiteral(ast) {
+    parseLiteral(ast): ObjectId {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError("parseLiteral: not a valid ObjectId, require a string with 12 or 24 hex chars, found: " + ast.kind, [
                 ast

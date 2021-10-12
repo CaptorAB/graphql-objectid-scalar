@@ -14,15 +14,15 @@ describe("graphql-objectid-scalar", () => {
     });
 
     test("Serialize should reject non ObjectId value", async () => {
-        await expect(() => serialize("garbage").toThrow(new GraphQLError()));
+        await expect(() => serialize("garbage").toThrow(new GraphQLError("")));
     });
 
     test("parseValue should reject garbage", async () => {
-        await expect(() => parseValue("garbage").toThrow(new GraphQLError()));
+        await expect(() => parseValue("garbage").toThrow(new GraphQLError("")));
     });
 
     test("parseLiteral should reject garbage", async () => {
-        await expect(() => parseLiteral({ value: "garbage", kind: Kind.STRING }, {}).toThrow(new GraphQLError()));
+        await expect(() => parseLiteral({ value: "garbage", kind: Kind.STRING }, {}).toThrow(new GraphQLError("")));
     });
 
     test("parseValue should return an ObjectId object", () => {

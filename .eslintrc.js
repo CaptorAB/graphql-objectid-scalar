@@ -1,43 +1,45 @@
+/* Copyright (C) 2018,2019,2020 Captor AB - All Rights Reserved
+ * Unauthorized copying or viewing of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Contact andreas.lindh@captor.se> for information
+ */
 module.exports = {
-    plugins: ["babel", "promise", "jest"],
+    plugins: [],
     env: {
         browser: true,
         node: true,
         es6: true,
-        jest: true,
-        "jest/globals": true
+        jest: true
     },
-    parser: "babel-eslint",
+    parser: "@typescript-eslint/parser",
     parserOptions: {
-        ecmaVersion: 2016,
-        sourceType: "module",
-        ecmaFeatures: {
-            jsx: true,
-            modules: true,
-            experimentalObjectRestSpread: true
-        }
+        ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+        sourceType: "module" // Allows for the use of imports
     },
-    extends: ["eslint:recommended", "plugin:promise/recommended", "plugin:jest/recommended", "prettier"],
+    extends: [
+        "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    ],
     rules: {
         "max-len": ["warn", 140],
-        "no-unused-vars": [
-            "error",
-            {
-                args: "none"
-            }
+        "no-var": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            { args: "after-used", ignoreRestSiblings: false, argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
         ],
         "no-console": "off",
+        "prefer-const": "off",
         "no-undef": "error", // disallow use of undeclared variables unless mentioned in a /*global */ block
         "no-undef-init": "error", // disallow use of undefined when initializing variables
         "no-undefined": "error", // disallow use of undefined variable (off by default)
-        "no-unused-vars": "warn", // disallow declaration of variables that are not used in the code
-        "no-use-before-define": "error", // disallow use of variables before they are defined
         "generator-star-spacing": 1,
-        "babel/new-cap": 1,
         "array-bracket-spacing": 1,
         "arrow-parens": 1,
         "no-await-in-loop": 1,
         "no-mixed-spaces-and-tabs": "warn",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         eqeqeq: "warn"
     }
 };

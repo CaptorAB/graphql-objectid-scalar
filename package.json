@@ -1,27 +1,16 @@
 {
     "name": "graphql-objectid-scalar",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "MongoDB objectId scalar for GraphQL.js",
     "files": [
-        "lib"
+        "lib/**/*"
     ],
-    "main": "lib/index.js",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
     "scripts": {
-        "build": "babel src -d lib --delete-dir-on-start",
-        "lint": "eslint src --ext .js",
-        "prepublish": "npm run build",
+        "build": "tsc",
+        "lint": "eslint --ext ts src",
         "test": "npx jest --detectOpenHandles --maxWorkers=1 --coverage"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.js": [
-            "eslint src --ext .js",
-            "git add"
-        ]
     },
     "prettier": {
         "printWidth": 140,
@@ -61,23 +50,14 @@
         "mongodb": ">=3.0.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.8.4",
-        "@babel/core": "^7.8.7",
-        "@babel/preset-env": "^7.10.3",
-        "babel-eslint": "^10.1.0",
-        "babel-jest": "^25.1.0",
-        "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.10.0",
-        "eslint-plugin-babel": "^5.3.0",
-        "eslint-plugin-import": "^2.20.1",
-        "eslint-plugin-jest": "^23.8.2",
-        "eslint-plugin-prettier": "^3.1.2",
-        "eslint-plugin-promise": "^4.2.1",
-        "graphql": ">=0.8.0",
-        "husky": "^4.2.3",
-        "jest": "^25.1.0",
-        "lint-staged": "^10.0.8",
-        "mongodb": ">=3.0.0",
-        "prettier": "^1.19.1"
+        "@types/jest": "27.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "eslint": "^7.12.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-config-standard": "^16.0.3",
+        "jest": "27.2.5",
+        "prettier": "2.4.1",
+        "ts-jest": "27.0.5",
+        "typescript": "4.4.3"
     }
 }
