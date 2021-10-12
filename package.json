@@ -19,12 +19,6 @@
         "bracketSpacing": true,
         "arrowParens": "always"
     },
-    "jest": {
-        "collectCoverageFrom": [
-            "src/**"
-        ],
-        "testEnvironment": "node"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/captorab/graphql-objectid-scalar.git"
