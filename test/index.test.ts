@@ -14,15 +14,28 @@ describe("graphql-objectid-scalar", () => {
     });
 
     test("Serialize should reject non ObjectId value", async () => {
-        await expect(() => serialize("garbage").toThrow(new GraphQLError("")));
+        const t = () => {
+            serialize("garbage");
+        };
+        expect(t).toThrow(new GraphQLError("serialize: value: garbage is not valid ObjectId"));
     });
 
     test("parseValue should reject garbage", async () => {
-        await expect(() => parseValue("garbage").toThrow(new GraphQLError("")));
+        const t = () => {
+            parseValue("garbage");
+        };
+        expect(t).toThrow(
+            new GraphQLError("parseValue: not a valid ObjectId string, require a string with 12 or 24 hex chars, found: garbage")
+        );
     });
 
     test("parseLiteral should reject garbage", async () => {
-        await expect(() => parseLiteral({ value: "garbage", kind: Kind.STRING }, {}).toThrow(new GraphQLError("")));
+        const t = () => {
+            parseLiteral({ value: "garbage", kind: Kind.STRING }, {});
+        };
+        expect(t).toThrow(
+            new GraphQLError("Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer")
+        );
     });
 
     test("parseValue should return an ObjectId object", () => {

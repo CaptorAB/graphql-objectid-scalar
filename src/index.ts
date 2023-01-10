@@ -19,10 +19,17 @@ export const GraphQLObjectId = new GraphQLScalarType({
     description: "GraphQLObjectId is a mongodb ObjectId. String of 12 or 24 hex chars",
 
     // from database towards client
-    serialize(value): string {
-        let result = value.toString();
-        if (!isValidMongoDBObjectID(result)) {
+    serialize(value: any): string {
+        let result: string;
+        if (value instanceof ObjectId) {
+            result = value.toString();
+        } else if (typeof value === "string" || value instanceof String) {
+            result = value.toString();
+        } else {
             throw new GraphQLError("serialize: value: " + value.toString() + " is not valid ObjectId");
+        }
+        if (!isValidMongoDBObjectID(result)) {
+            throw new GraphQLError("serialize: value: " + result + " is not valid ObjectId");
         }
 
         return result;
@@ -30,24 +37,25 @@ export const GraphQLObjectId = new GraphQLScalarType({
 
     // json from client towards database
     parseValue(value): ObjectId {
-        if (!isValidMongoDBObjectID(value)) {
-            throw new GraphQLError("serialize: not a valid ObjectId, require a string with 12 or 24 hex chars, found: " + value);
+        if (!isValidMongoDBObjectID(value as string)) {
+            throw new GraphQLError("parseValue: not a valid ObjectId string, require a string with 12 or 24 hex chars, found: " + value);
         }
 
-        return new ObjectId(value);
+        return new ObjectId(value as string);
     },
 
     // AST from client towards database
     parseLiteral(ast): ObjectId {
         if (ast.kind !== Kind.STRING) {
-            throw new GraphQLError("parseLiteral: not a valid ObjectId, require a string with 12 or 24 hex chars, found: " + ast.kind, [
-                ast
-            ]);
+            throw new GraphQLError(
+                "parseLiteral: not a valid ObjectId string, require a string with 12 or 24 hex chars, found: " + ast.kind,
+                [ast]
+            );
         }
 
         const value = ast.value.toString();
         return new ObjectId(value);
-    }
+    },
 });
 
 export default GraphQLObjectId;
